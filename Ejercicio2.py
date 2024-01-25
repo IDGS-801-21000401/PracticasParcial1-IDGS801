@@ -30,6 +30,8 @@ class Ejercicio2:
         impares = [numero for numero in numeros if numero % 2 != 0]
         # Separar los números en repetidos
         repetidos = [numero for numero, count in repeticiones.items() if count > 1]
+        print("holaa" , repeticiones)
+        print("holaa2c" , repetidos)
 
         # Imprimir los datos
         print("Lista de Números ordenados:", ordenados)

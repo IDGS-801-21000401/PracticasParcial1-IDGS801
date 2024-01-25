@@ -1,0 +1,40 @@
+{% extends "layout2.html" %}
+
+{% block container %}
+<h1>Calculadora</h1>
+    
+    <div style="padding-top: 5%">
+        <p>Formulario</p>
+
+
+    <form action="/resultado" method="POST">
+
+        <div>
+            <div class="container">
+                <p>Seleccione un tipo de operación matemática</p>
+                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                  <input type="radio" class="btn-check" name="btnSuma" id="btnSuma" >
+                  <label class="btn btn-outline-primary" for="btnSuma">Suma</label>
+              
+                  <input type="radio" class="btn-check" name="btnResta" id="btnResta" >
+                  <label class="btn btn-outline-primary" for="btnResta">Resta</label>
+              
+                  <input type="radio" class="btn-check" name="btnMultiplicacion" id="btnMultiplicacion" >
+                  <label class="btn btn-outline-primary" for="btnMultiplicacion">Multiplicacion</label>
+              
+                  <input type="radio" class="btn-check" name="btnDivision" id="btnDivision">
+                  <label class="btn btn-outline-primary" for="btnDivision">Division</label>
+                </div>
+              </div>
+        </div>
+        
+        <label>Numero 1: </label>
+        <input class="form-control" type="text" name="n1"><br>
+        <label>Numero 2: </label>
+        <input class="form-control" type="text" name="n2"><br>
+        <input class="btn btn-success" type="submit">
+    </div>
+</form>
+
+
+{%endblock%}
