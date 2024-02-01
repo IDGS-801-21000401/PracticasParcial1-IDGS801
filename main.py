@@ -1,12 +1,10 @@
 from flask import Flask, render_template, request
+from forms import UserForm
+from math import sqrt
 
 app = Flask(__name__)
 
-@app.route("/OperasBas", methods=["GET", "POST"])
-def operaBas():
-    return render_template("OperasBas.html")
-
-@app.route("/resultado", methods=["POST"])
+@app.route("/calculadora", methods=["POST"])
 def result():
     if request.method == "POST":
         operacion = request.form.get("operacion")
@@ -27,6 +25,25 @@ def result():
 
         # Agrega un retorno por defecto en caso de que la operación no sea reconocida
         return "Operación no válida"
+
+
+
+@app.route("/distancia", methods=["GET", "POST"])
+def distancia():
+    ejercicio = UserForm(request.form)
+    x1 = ""
+    x2 = ""
+    y1 = ""
+    y2 = ""
+    resultado = ""
+    if request.method == "POST":
+        x1 = ejercicio.x1.data
+        y1 = ejercicio.y1.data
+        x2 = ejercicio.x2.data
+        y2 = ejercicio.y2.data
+
+        resultado = sqrt((x2 - x1)**2 + (y2 - y1)**2)
+    return render_template("distancia.html",form=ejercicio,x1=x1, y1=y1, x2=x2, y2=y2, resultado = resultado)
 
 if __name__ == "__main__":
     app.run(debug=True)

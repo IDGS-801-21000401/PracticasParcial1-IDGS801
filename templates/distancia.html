@@ -1,0 +1,35 @@
+{% extends "layout2.html" %}
+
+{% block container %}
+{% import "_macros.html" as macros%}
+
+<h3>DISTANCIA</h3>
+
+<form action="" method="POST" novalidate>
+    <div class="row control-group">
+        <div class="form-group col-xs-12 floating-label-form-group ontrols">
+            {{macros.campoNuevo(form.x1,class="form-control")}}
+        </div>
+    </div>
+    <div class="row control-group">
+        <div class="form-group col-xs-12 floating-label-form-group ontrols">
+            {{macros.campoNuevo(form.y1,class="form-control")}}
+        </div>
+    </div>
+    <div class="row control-group">
+        <div class="form-group col-xs-12 floating-label-form-group ontrols">
+            {{macros.campoNuevo(form.x2,class="form-control")}}
+        </div>
+    </div>
+    <div class="row control-group">
+        <div class="form-group col-xs-12 floating-label-form-group ontrols">
+            {{macros.campoNuevo(form.y2,class="form-control")}}
+        </div>
+    </div> 
+    
+    <input type="submit" class="btn btn-success"> </button>
+</form>
+
+<h3>Resultado de la distancia entre el punto ({{x1}},{{y1}}) y ({{x2}},{{y2}}) es: <b>{{resultado}}</b></h3>
+
+{%endblock%}

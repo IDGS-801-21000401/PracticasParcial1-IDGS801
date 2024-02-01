@@ -1,0 +1,7 @@
+
+{% macro campoNuevo(field) %}
+    <label style="text-transform: capitalize;">{{field.label}}</label>
+    <div>{{field(**kwargs) | safe }}</div>
+{% endmacro %}
+
+
