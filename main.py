@@ -4,6 +4,9 @@ from math import sqrt
 
 app = Flask(__name__)
 
+### EJERCICIO 3
+### CALCULADOR
+
 @app.route("/calculadora", methods=["POST"])
 def result():
     if request.method == "POST":
@@ -27,7 +30,9 @@ def result():
         return "Operación no válida"
 
 
-
+### EJERCICIO 4 
+### DISTANCIA
+    
 @app.route("/distancia", methods=["GET", "POST"])
 def distancia():
     ejercicio = UserForm(request.form)
@@ -44,6 +49,7 @@ def distancia():
 
         resultado = sqrt((x2 - x1)**2 + (y2 - y1)**2)
     return render_template("distancia.html",form=ejercicio,x1=x1, y1=y1, x2=x2, y2=y2, resultado = resultado)
+
 
 if __name__ == "__main__":
     app.run(debug=True)
