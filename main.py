@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-from forms import UserForm
+from forms import UserForm,calculadoraResistencia
 from math import sqrt
 
 app = Flask(__name__)
@@ -50,6 +50,44 @@ def distancia():
         resultado = sqrt((x2 - x1)**2 + (y2 - y1)**2)
     return render_template("distancia.html",form=ejercicio,x1=x1, y1=y1, x2=x2, y2=y2, resultado = resultado)
 
+
+### EXAMEN
+### CALCULADORA DE RESISTENCIAS
+
+## ORO Y PLATA
+## 5%      10%
+@app.route("/resistencias", methods=["GET", "POST"])
+def resistencias():
+    resistencia = calculadoraResistencia(request.form)
+    primerBanda = ""
+    segundaBanda = ""
+    tercerBanda = ""
+    tolerancia = ""
+    resultado = ""
+    colores_resistencia = ["Negro", "Café", "Rojo", "Naranja", "Amarillo", "Verde", "Azul", "Violeta", "Gris", "Blanco"]
+    
+    valores_colores = {"Negro": 0,"Café": 1,"Rojo": 2,"Naranja": 3,"Amarillo": 4,"Verde": 5,"Azul": 6,"Violeta": 7,"Gris": 8,"Blanco": 9,"oro": 0.05, "plata": 0.10}
+    multiplicador = {"Negro":1,"Café":10,"Rojo":100,"Naranja":1000,"Amarillo":10000,"Verde":100000,"Azul":1000000,"Violeta":10000000,"Gris":100000000,"Blanco":1000000000}
+    min_resistencia = ""
+    max_resistencia = ""
+    valor_resistencia = ""
+    
+    if request.method == "POST":
+        primerBanda = resistencia.primerBanda.data
+        segundaBanda = resistencia.segundaBanda.data
+        tercerBanda = resistencia.tercerBanda.data
+        tolerancia = resistencia.tolerancia.data
+
+        # Calcular el valor de la resistencia
+        valor_resistencia = (valores_colores[primerBanda] * 10 + valores_colores[segundaBanda]) * multiplicador[tercerBanda]
+    
+        # Calcular los valores máximo y mínimo con tolerancia
+        min_resistencia = valor_resistencia + (valor_resistencia * valores_colores[tolerancia])
+        max_resistencia = valor_resistencia - (valor_resistencia * valores_colores[tolerancia])
+        
+        print(max_resistencia)
+        print(min_resistencia)
+    return render_template("resistencias.html",form=resistencia, colores_resistencia = colores_resistencia, resultado = resultado, primerBanda = primerBanda, segundaBanda = segundaBanda, tercerBanda = tercerBanda, tolerancia=tolerancia,valor_resistencia=valor_resistencia, min_resistencia = min_resistencia, max_resistencia = max_resistencia)
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -1,7 +1,20 @@
-
 {% macro campoNuevo(field) %}
-    <label style="text-transform: capitalize;">{{field.label}}</label>
-    <div>{{field(**kwargs) | safe }}</div>
+<label style="text-transform: capitalize;">{{field.label}}</label>
+<div>{{field(**kwargs) | safe }}</div>
 {% endmacro %}
 
+{% macro campoTolerancia(field) %}
+<input type="radio" class="btn-check" name="{{ field.name }}" id="{{ field.id }}_oro" value="oro">
+<label class="btn btn-outline-secondary" for="{{ field.id }}_oro">Oro</label>
 
+<input type="radio" class="btn-check" name="{{ field.name }}" id="{{ field.id }}_plata" value="plata">
+<label class="btn btn-outline-secondary" for="{{ field.id }}_plata">Plata</label>
+{% endmacro %}
+
+{% macro campoResistencia(field, colores) %}
+<label style="text-transform: capitalize;">{{ field.label }}</label>
+<div class="pt-3">
+    <option value="{{ color }}">{{ color }}</option>
+    </select>
+</div>
+{% endmacro %}

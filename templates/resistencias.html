@@ -1,0 +1,58 @@
+{% extends "layout2.html" %}
+
+{% block container %}
+{% import "_macros.html" as macros %}
+
+
+<h2> CALCULADORA DE RESISTENCIAS</h2>
+<form action="" method="POST" novalidate class="pt-5">
+    <div class="d-flex flex-row" >
+        <div class="form-group" style="padding-left: 15%;">
+            {{ form.primerBanda(class="form-control") }}
+        </div>
+        <div class="form-group" style="padding-left: 15%;">
+            {{ form.segundaBanda(class="form-control") }}
+        </div>
+        <div class="form-group" style="padding-left: 15%;">
+            {{ form.tercerBanda(class="form-control") }}
+        </div>
+    </div>
+    <div>
+        <p>Tolerancia</p>
+
+        {{ macros.campoTolerancia(form.tolerancia) }}
+
+    </div>
+    <div class="pt-5">
+    <button type="submit" class="w-100 btn btn-success">Calcular Resistencia</button>
+    </div>
+</form>
+
+<div class="pt-5">
+<h5 class="text-center">RESULTADO</h5>
+<table class="table">
+    <thead>
+        <tr class="text-center">
+            <th>Primer Banda</th>
+            <th>Segunda Banda</th>
+            <th>Tercer Banda</th>
+            <th>Tolerancia</th>
+            <th>Valor</th>
+            <th>Valor Máximo</th>
+            <th>Valor Minimo</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="text-center">
+            <th class="{{primerBanda}}" >{{primerBanda}}</th>
+            <th class="{{segundaBanda}}" >{{segundaBanda}}</th>
+            <th class="{{tercerBanda}}" >{{tercerBanda}}</th>
+            <th class="{{tolerancia}}" >{{tolerancia}}</th>
+            <th>{{valor_resistencia}} Ω</th>
+            <th>{{min_resistencia}} Ω</th>
+            <th>{{max_resistencia}} Ω</th>
+        </tr>
+    </tbody>
+</table>
+</div>
+{% endblock %}
