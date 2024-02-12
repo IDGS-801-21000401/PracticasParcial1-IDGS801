@@ -65,7 +65,6 @@ def resistencias():
     tolerancia = ""
     resultado = ""
     colores_resistencia = ["Negro", "Café", "Rojo", "Naranja", "Amarillo", "Verde", "Azul", "Violeta", "Gris", "Blanco"]
-    
     valores_colores = {"Negro": 0,"Café": 1,"Rojo": 2,"Naranja": 3,"Amarillo": 4,"Verde": 5,"Azul": 6,"Violeta": 7,"Gris": 8,"Blanco": 9,"oro": 0.05, "plata": 0.10}
     multiplicador = {"Negro":1,"Café":10,"Rojo":100,"Naranja":1000,"Amarillo":10000,"Verde":100000,"Azul":1000000,"Violeta":10000000,"Gris":100000000,"Blanco":1000000000}
     min_resistencia = ""
