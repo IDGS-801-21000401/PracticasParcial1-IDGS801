@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
-from forms import UserForm,calculadoraResistencia
+from forms import UserForm,calculadoraResistencia,Documentos,buscar
 from math import sqrt
+from io import open
 
 app = Flask(__name__)
 
@@ -87,6 +88,56 @@ def resistencias():
         print(max_resistencia)
         print(min_resistencia)
     return render_template("resistencias.html",form=resistencia, colores_resistencia = colores_resistencia, resultado = resultado, primerBanda = primerBanda, segundaBanda = segundaBanda, tercerBanda = tercerBanda, tolerancia=tolerancia,valor_resistencia=valor_resistencia, min_resistencia = min_resistencia, max_resistencia = max_resistencia)
+
+
+######################
+###### Archivos ######
+######################
+@app.route("/documentos", methods=["GET", "POST"])
+def documentos():
+    ingles = ""
+    espaniol = ""
+    busqueda = ""
+    documentos = Documentos(request.form)
+    form_busqueda = buscar(request.form)  # Crear una instancia del formulario de búsqueda
+    resultado = ""
+    error = ""
+
+    if request.method == "POST":
+        if "action" in request.form:  
+            if request.form["action"] == "Registrar" and documentos.validate():
+                ingles = documentos.ingles.data
+                espaniol = documentos.espaniol.data
+                archivo = open('archivo.txt','a')
+                archivo.write(espaniol + "," + ingles + "\n")
+                archivo.close()
+                documentos.ingles.data = ""
+                documentos.espaniol.data = ""
+                documentos = Documentos()
+
+            elif request.form["action"] == "Buscar" and form_busqueda.validate():  
+                busqueda = form_busqueda.busqueda.data.lower()  
+                resultado = ""  
+
+                with open('archivo.txt', 'r') as archivo:
+                    for linea in archivo:
+                        palabras = linea.strip().split(",")  
+                        print(palabras)
+                        if busqueda == palabras[0].strip().lower(): 
+                            resultado = palabras[1].strip() 
+                            error = ""
+                            break
+                        elif busqueda == palabras[1].strip().lower(): 
+                            resultado = palabras[0].strip()  
+                            error = ""
+                            break
+                    
+                if resultado == "":
+                    resultado = "No se encontró ningún valor" 
+                    error = "error"
+    return render_template("documentos.html", form=documentos, form2=form_busqueda,resultado=resultado, error=error)
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)

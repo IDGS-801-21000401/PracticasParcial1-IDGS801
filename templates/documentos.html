@@ -1,0 +1,38 @@
+{% extends "layout2.html" %}
+
+{% block container %}
+{% import "_macros.html" as macros %}
+<form action="" method="POST" novalidate class="pt-3">
+    <h3>REGISTRAR</h3>
+    <p>Registre una palabra en español e inglés</p>
+    <div class="d-flex flex-row">
+        <div class="form-group" style="">
+            {{ macros.campoNuevo(form.espaniol, class="form-control") }}
+            <br>
+            {{ macros.campoNuevo(form.ingles, class="form-control") }}
+        </div>
+    </div>
+    <div class="pt-4">
+        <button type="submit" name="action" value="Registrar" class="btn btn-success"
+            style="width: 200px;">Registrar</button>
+    </div>
+    <div>
+        <hr>
+        <h3>LEER</h3>
+        <p>Seleccione un idioma</p>
+        {{ macros.radioButtons(form2.idiomas) }}
+
+        <div class="d-flex flex-row">
+            <div class="form-group">
+                {{ macros.campoNuevo(form2.busqueda, class="form-control") }}
+            </div>
+        </div>
+        <p class="pt-3">Resultado: <label class="{{error}}">{{ resultado }}</label></p>
+       
+    </div>
+    <div class="">
+        <button type="submit" name="action" value="Buscar" class="btn btn-success" style="width: 200px;">Buscar</button>
+    </div>
+</form>
+
+{% endblock %}

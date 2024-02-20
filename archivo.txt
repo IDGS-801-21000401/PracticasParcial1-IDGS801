@@ -1,0 +1,8 @@
+Hola,Hello
+Verde,Green
+Auto,Car
+Telefono,Phone
+Amarillo,Yellow
+Morado,Purple
+Pelota,Ball
+Mesa,Table

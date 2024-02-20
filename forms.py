@@ -1,4 +1,4 @@
-from wtforms import Form,FloatField,RadioField,SelectField
+from wtforms import validators,Form,FloatField,RadioField,SelectField,StringField
 
 
 class UserForm(Form):
@@ -15,3 +15,20 @@ class calculadoraResistencia(Form):
     tolerancia = RadioField("Tolerancia", choices=[("oro", "Oro"), ("plata", "Plata")])
 
 
+class Documentos(Form):
+    ingles = StringField("ingles",[
+        validators.DataRequired(message='El campo es requerido.'),
+        validators.length(min=2,max=10,message='El minimo es 4 y el máximo es 10'),
+    ])
+    espaniol = StringField("español",[
+        validators.DataRequired(message='El campo es requerido.'),
+        validators.length(min=2,max=10,message='El minimo es 4 y el máximo es 10'),
+    ])
+    
+class buscar(Form):
+    idiomas = RadioField("", choices=[("espanio", "Español"), ("ingles", "Inglés")])
+    busqueda = StringField("",[
+        validators.DataRequired(message='El campo es requerido.'),
+        validators.length(min=2,max=10,message='El minimo es 4 y el máximo es 10'),
+    ])
+    

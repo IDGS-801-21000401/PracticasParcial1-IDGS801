@@ -1,6 +1,11 @@
 {% macro campoNuevo(field) %}
-<label style="text-transform: capitalize;">{{field.label}}</label>
+<label  style="text-transform: capitalize;">{{field.label}}</label>
 <div>{{field(**kwargs) | safe }}</div>
+{% if field.errors%}
+        {% for error in field.errors%}
+            <p style="padding-left: 1%; color: red">{{error}}</p>
+        {%endfor%}
+    {%endif%}
 {% endmacro %}
 
 {% macro campoTolerancia(field) %}
@@ -10,4 +15,12 @@
 <input type="radio" class="btn-check" name="{{ field.name }}" id="{{ field.id }}_plata" value="plata">
 <label class="btn btn-outline-secondary" for="{{ field.id }}_plata">Plata</label>
 {% endmacro %}
+
+{% macro radioButtons(field) %}
+{% for value, label in field.choices %}
+    <input type="radio" class="btn-check" name="{{ field.name }}" id="{{ field.id }}_{{ value }}" value="{{ value }}">
+    <label class="btn btn-outline-secondary" for="{{ field.id }}_{{ value }}">{{ label }}</label>
+{% endfor %}
+{% endmacro %}
+
 
