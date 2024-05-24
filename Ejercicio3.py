@@ -30,23 +30,7 @@ class Ejercicio2:
         impares = [numero for numero in numeros if numero % 2 != 0]
         # Separar los números en repetidos
         repetidos = [numero for numero, count in repeticiones.items() if count > 1]
-        print("holaa" , repeticiones)
-        print("holaa2c" , repetidos)
-
-        # Imprimir los datos
-        print("Lista de Números ordenados:", ordenados)
-        print("Números pares:", pares)
-        print("Números impares:", impares)
-        print("Números repetidos:")
-        for numero in repetidos:
-            print("El Número {} se repitió {} veces".format(numero,repeticiones[numero]))
-
-
-def main():
-    # Solicitar al usuario ingresar la cantidad de números
-        numero_usuario = int(input("Ingrese la cantidad de números: "))
-        obj = Ejercicio2(numero_usuario)
-        obj.ejercicio2()
+        
 
 if __name__ == "__main__":
     main()
